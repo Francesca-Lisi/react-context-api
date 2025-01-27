@@ -1,30 +1,31 @@
-import React from 'react'
+import { useGlobalContext } from '../context/GlobalContext'
+import { useEffect } from 'react'
 
 const PostList = () => {
-  return (
-    <div className='card m-5 p-3'>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Immagine</th>
-            <th scope="col">Titolo</th>
-            <th scope="col">Contenuto</th>
-            <th scope="col">Tags</th>
-            <th scope="col">Azioni</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
 
-        </tbody>
-      </table>
-    </div>
+  const { posts, fetchPosts } = useGlobalContext();
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
+
+  return (
+    <div className='container my-5 p-3'>
+      <div className='row row-cols-2'>
+        {posts.map(post => (
+          <div className="col" key={post.id}>
+            <div className="card m-2 p-4">
+              <img src={post.image} alt={post.title} />
+              <h4>{post.title}</h4>
+              <p>{post.content}</p>
+              <p><strong>Tags:</strong> {post.tags.join(', ')}</p>
+              <div><button className='btn btn-outline-danger'>Elimina</button></div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div >
   )
 }
 
