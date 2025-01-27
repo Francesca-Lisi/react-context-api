@@ -1,8 +1,14 @@
 import { GlobalProvider } from "./context/GlobalContext"
+import PostPage from "./components/PostPage"
+import PostList from "./components/PostList"
 
 const App = () => {
   return (
-    <div>App</div>
+    <GlobalProvider>
+      <PostPage />
+      <PostList />
+    </GlobalProvider>
+
   )
 }
 
